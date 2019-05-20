@@ -1,4 +1,4 @@
-package TaskManager_React.TaskManager_React;
+package ru.burmistrov.taskManager_React;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

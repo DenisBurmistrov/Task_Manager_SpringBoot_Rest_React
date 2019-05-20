@@ -1,4 +1,4 @@
-package TaskManager_React.TaskManager_React;
+package ru.burmistrov.taskManager_React;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
