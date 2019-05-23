@@ -5,10 +5,8 @@ import com.sun.istack.NotNull;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.burmistrov.taskManager_React.entity.dto.LoginDto;
 
 import java.text.ParseException;
 
@@ -17,10 +15,10 @@ import java.text.ParseException;
 public class AuthController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public void auth(@RequestBody @NotNull final String username,
-                        @RequestBody @NotNull final String password) throws ParseException {
+    public void auth(@RequestBody @NotNull final LoginDto loginDto) throws ParseException {
 
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+        UsernamePasswordAuthenticationToken token =
+                new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
         SecurityContextHolder.getContext().setAuthentication(token);
     }
 }
