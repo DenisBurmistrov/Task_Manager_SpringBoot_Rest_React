@@ -35,14 +35,14 @@ public class ProjectController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     //@PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
     public ProjectDto persist(@RequestBody @NotNull final ProjectDto projectDto, @NotNull final Authentication authentication) throws ParseException {
-        @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
+//        @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
         return projectService.persist(projectDto, "c73a908f-41d7-407d-a7eb-4ce4e3d97be7"/* Objects.requireNonNull(customUser.getUser()).getId()*/);
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     //@PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
     public ProjectDto merge(@RequestBody @NotNull final ProjectDto projectDto, @NotNull final Authentication authentication) throws ParseException {
-        @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
+        //@NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
         return projectService.merge(projectDto, "c73a908f-41d7-407d-a7eb-4ce4e3d97be7"/* Objects.requireNonNull(customUser.getUser()).getId()*/);
     }
 
@@ -56,7 +56,7 @@ public class ProjectController {
     @DeleteMapping("/remove/{id}")
     //@PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
     public void removeProjectGet(@PathVariable final String id, Authentication authentication) {
-        CustomUser customUser = (CustomUser) authentication.getPrincipal();
+       // CustomUser customUser = (CustomUser) authentication.getPrincipal();
         projectService.removeById(id, "c73a908f-41d7-407d-a7eb-4ce4e3d97be7"/*Objects.requireNonNull(customUser.getUser()).getId()*/);
     }
 }

@@ -11,13 +11,13 @@ import java.util.Date;
 public class DateUtil {
 
     public static Date parseString(String date) throws ParseException {
-        @NotNull final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        @NotNull final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         @NotNull final Date dateEnd = simpleDateFormat.parse(date);
         return dateEnd;
     }
 
     public static String parseDate(Date date) throws ParseException {
-        @NotNull final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        @NotNull final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return simpleDateFormat.format(date);
     }
 }
