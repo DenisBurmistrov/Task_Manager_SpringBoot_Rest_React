@@ -28,35 +28,42 @@ public class TaskController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     //@PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
     public TaskDto findProjectById(@PathVariable @NotNull final String id, @NotNull final Authentication authentication) throws ParseException {
-        @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
+       // @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
         return taskService.findOneById(id, "c73a908f-41d7-407d-a7eb-4ce4e3d97be7"/*Objects.requireNonNull(customUser.getUser()).getId()*/);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     //@PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
     public TaskDto persist(@RequestBody @NotNull final TaskDto taskDto, @NotNull final Authentication authentication) throws ParseException {
-        @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
+       // @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
         return taskService.persist(taskDto, "c73a908f-41d7-407d-a7eb-4ce4e3d97be7"/*Objects.requireNonNull(customUser.getUser()).getId()*/);
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     //@PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
     public TaskDto merge(@RequestBody @NotNull final TaskDto taskDto, @NotNull final Authentication authentication) throws ParseException {
-        @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
+       // @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
         return taskService.merge(taskDto, "c73a908f-41d7-407d-a7eb-4ce4e3d97be7"/*Objects.requireNonNull(customUser.getUser()).getId()*/);
     }
 
     @GetMapping(value = "/list/{projectId}", produces = MediaType.APPLICATION_JSON_VALUE)
     //@PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
-    public List<TaskDto> findAllTasks(@PathVariable @NotNull final String projectId, @NotNull final Authentication authentication) throws ParseException {
-        @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
+    public List<TaskDto> findAllTasksInProject(@PathVariable @NotNull final String projectId, @NotNull final Authentication authentication) throws ParseException {
+      //  @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
         return taskService.findAllInProject("c73a908f-41d7-407d-a7eb-4ce4e3d97be7"/*Objects.requireNonNull(customUser.getUser()).getId()*/, projectId);
+    }
+
+    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    //@PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
+    public List<TaskDto> findAllTasks(@NotNull final Authentication authentication) throws ParseException {
+        //  @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
+        return taskService.findAll("c73a908f-41d7-407d-a7eb-4ce4e3d97be7"/*Objects.requireNonNull(customUser.getUser()).getId()*/);
     }
 
     @DeleteMapping("/remove/{id}")
     //@PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
     public void removeProjectGet(@PathVariable final String id, Authentication authentication) {
-        CustomUser customUser = (CustomUser) authentication.getPrincipal();
+      //  CustomUser customUser = (CustomUser) authentication.getPrincipal();
         taskService.removeById(id, "c73a908f-41d7-407d-a7eb-4ce4e3d97be7"/*Objects.requireNonNull(customUser.getUser()).getId()*/);
     }
 }

@@ -21,5 +21,8 @@ public interface ITaskService {
     @Nullable
     List<TaskDto> findAllInProject(@NotNull final String userId, @NotNull final String projectId) throws ParseException;
 
+    @Nullable
+    List<TaskDto> findAll(@NotNull final String userId) throws ParseException;
+
     void removeById(@NotNull final String id, @NotNull final String userId);
 }

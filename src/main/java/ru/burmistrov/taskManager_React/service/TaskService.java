@@ -63,6 +63,7 @@ public class TaskService implements ITaskService {
             task.setName(taskDto.getName());
             task.setDescription(taskDto.getDescription());
             task.setDateEnd(DateUtil.parseString(taskDto.getDateEnd()));
+            task.setProjectId(taskDto.getProjectId());
             taskRepository.save(task);
             return taskDto;
         }
@@ -72,6 +73,25 @@ public class TaskService implements ITaskService {
     @Nullable
     public List<TaskDto> findAllInProject(@NotNull final String userId, @NotNull final String projectId) throws ParseException {
         List<Task> tasks = taskRepository.findAllByProjectId(userId, projectId);
+        List<TaskDto> result = new ArrayList<>();
+        if (tasks != null) {
+            for (Task task : tasks) {
+                TaskDto taskDto = new TaskDto();
+                taskDto.setId(task.getId());
+                taskDto.setName(task.getName());
+                taskDto.setDescription(task.getDescription());
+                taskDto.setProjectId(task.getProjectId());
+                taskDto.setDateBegin(DateUtil.parseDate(task.getDateBegin()));
+                taskDto.setDateEnd(DateUtil.parseDate(task.getDateEnd()));
+                result.add(taskDto);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<TaskDto> findAll(String userId) throws ParseException {
+        List<Task> tasks = taskRepository.findAll(userId);
         List<TaskDto> result = new ArrayList<>();
         if (tasks != null) {
             for (Task task : tasks) {
