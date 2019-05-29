@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import ru.burmistrov.taskManager_React.entity.Project;
 import ru.burmistrov.taskManager_React.entity.Task;
 
 import java.util.List;
@@ -26,4 +27,7 @@ public interface ITaskRepository extends JpaRepository<Task, Long> {
     @Nullable
     @Query(value = "SELECT task FROM Task task WHERE task.userId = :userId AND task.projectId = :projectId")
     List<Task> findAllByProjectId(@NotNull @Param(value = "userId") final String userId, @NotNull @Param(value = "projectId") final String projectId);
+
+    @Query(value = "SELECT task FROM Task task WHERE task.userId = :userId")
+    List<Task> findAll(@NotNull @Param(value = "userId") final String userId);
 }

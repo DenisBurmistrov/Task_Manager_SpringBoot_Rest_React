@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/task")
+@RequestMapping(value = "/api/task")
 public class TaskController {
 
     private final ITaskService taskService;
@@ -48,9 +48,16 @@ public class TaskController {
 
     @GetMapping(value = "/list/{projectId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
-    public List<TaskDto> findAllTasks(@PathVariable @NotNull final String projectId, @NotNull final Authentication authentication) throws ParseException {
+    public List<TaskDto> findAllTasksInProject(@PathVariable @NotNull final String projectId, @NotNull final Authentication authentication) throws ParseException {
         @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
         return taskService.findAllInProject(Objects.requireNonNull(customUser.getUser()).getId(), projectId);
+    }
+
+    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
+    public List<TaskDto> findAllTasks(@NotNull final Authentication authentication) throws ParseException {
+          @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
+        return taskService.findAll(Objects.requireNonNull(customUser.getUser()).getId());
     }
 
     @DeleteMapping("/remove/{id}")

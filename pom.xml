@@ -14,6 +14,8 @@
 	<name>TaskManager_React</name>
 	<description>Demo project for Spring Boot</description>
 
+
+
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -74,15 +76,72 @@
 			<version>13.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
 
     </dependencies>
 
 	<build>
+
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+						<nonFilteredFileExtension>woff</nonFilteredFileExtension>
+						<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.6</version>
+				<configuration>
+					<installDirectory>target</installDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>v10.11.0</nodeVersion>
+							<npmVersion>6.4.1</npmVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>webpack build</id>
+						<goals>
+							<goal>webpack</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
 		</plugins>
 	</build>
 
