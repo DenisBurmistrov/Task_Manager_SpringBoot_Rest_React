@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/project")
+@RequestMapping(value = "/api/project")
 public class ProjectController {
 
     private final IProjectService projectService;
@@ -49,6 +49,7 @@ public class ProjectController {
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('COMMON_USER') or hasAuthority('ADMINISTRATOR')")
     public List<ProjectDto> findAllProjects(@NotNull final Authentication authentication) throws ParseException {
+        System.out.println(authentication);
         @NotNull final CustomUser customUser = (CustomUser) authentication.getPrincipal();
         return projectService.findAll(Objects.requireNonNull(customUser.getUser()).getId());
     }

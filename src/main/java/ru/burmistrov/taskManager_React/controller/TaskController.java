@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(value = "/task")
+@RequestMapping(value = "/api/task")
 public class TaskController {
 
     private final ITaskService taskService;
